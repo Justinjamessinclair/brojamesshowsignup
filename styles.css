@@ -221,6 +221,7 @@ textarea::placeholder {
 .form-note {
   font-size: 0.85rem;
   color: var(--muted);
+  align-items: center;
   margin-top: 12px;
   text-align: center;
 }
@@ -229,6 +230,26 @@ textarea::placeholder {
   display: inline-block;
   margin-bottom: 5px;
   color: var(--primary);
+}
+
+/* Updated consent checkbox styling for the form note */
+.form-note.consent-group {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-top: 16px;
+  margin-bottom: -10px;
+}
+
+.form-note.consent-group input[type="checkbox"] {
+  width: auto;
+  margin-top: 0.25em;
+  margin-right: 10px;
+}
+
+.form-note.consent-group span:first-child {
+  display: inline;
+  margin-bottom: 0;
 }
 
 .actions {
@@ -469,4 +490,29 @@ textarea::placeholder {
   margin-right: 8px;
   filter: none !important;
   vertical-align: middle;
+}
+
+/* Styling for the consent checkbox */
+.consent-group {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: var(--gap);
+}
+
+.consent-group input[type="checkbox"] {
+  width: auto;
+  margin-top: 0.25em;
+  margin-right: 10px;
+}
+
+.consent-group label {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0;
+  flex: 1;
+}
+
+.consent-group a {
+  color: var(--green);
+  text-decoration: underline;
 }

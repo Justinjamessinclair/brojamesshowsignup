@@ -15,10 +15,14 @@
 
   signupForm.addEventListener('submit', async e => {
     e.preventDefault();
-    const name  = signupForm.name.value.trim();
-    const email = signupForm.email.value.trim();
-    const zip   = signupForm.zip.value.trim();
-    if (!name || !email || !zip) return alert('Please fill out all fields.');
+    const name    = signupForm.name.value.trim();
+    const email   = signupForm.email.value.trim();
+    const zip     = signupForm.zip.value.trim();
+    const consent = signupForm.consent.checked; // Will add this checkbox below
+    
+    if (!name || !email || !zip || !consent) {
+      return alert('Please fill out all fields and agree to join the mailing list.');
+    }
 
     // Basic validation
     const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -32,26 +36,26 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'Signing up...';
 
+    // First backup: Save to localStorage in case submission fails
     try {
-      // Create form data for application/x-www-form-urlencoded
-      const formData = new URLSearchParams();
-      formData.append('name', name);
-      formData.append('email', email);
-      formData.append('zip', zip);
+      const timestamp = new Date().toISOString();
+      const backupData = { name, email, zip, consent, timestamp, submitted: false };
+      localStorage.setItem(`signup_${email}`, JSON.stringify(backupData));
       
-      // Modified fetch to work around CORS
+      // Main submission logic
       const response = await fetch(GOOGLE_SHEET_URL, {
         method: 'POST',
-        mode: 'no-cors', // Important: This allows the request to succeed without CORS headers
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, email, zip })
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          name, email, zip, consent, 
+          token: "your-secret-here" // Same token as server
+        })
       });
-
-      // Since we're using no-cors, we can't access the response
-      // Instead, assume success and proceed
+      
+      // Mark as submitted in localStorage
+      backupData.submitted = true;
+      localStorage.setItem(`signup_${email}`, JSON.stringify(backupData));
       
       // Show success state
       toggle(signupForm, false);
@@ -70,7 +74,17 @@
       
     } catch (error) {
       console.error('Error submitting form:', error);
-      alert('Sorry, there was a problem adding you to the list. Please try again!');
+      
+      // Second backup: Send via email if available
+      const mailtoLink = `mailto:backup@yourdomain.com?subject=Signup%20Backup&body=Name:%20${encodeURIComponent(name)}%0AEmail:%20${encodeURIComponent(email)}%0AZip:%20${encodeURIComponent(zip)}%0AConsent:%20${consent}`;
+      
+      const backupConfirm = confirm('There was a problem connecting to our server. Would you like to send your info via email instead?');
+      
+      if (backupConfirm) {
+        window.location.href = mailtoLink;
+      } else {
+        alert('Your information has been saved locally. Try submitting again later.');
+      }
       
       // Reset button
       submitBtn.disabled = false;
@@ -86,4 +100,27 @@
     window.location.href =
       `mailto:justinsinclairsongs@gmail.com?subject=Venue Suggestion&body=${encodeURIComponent(suggestion)}`;
   });
+  
+  // Add recovery function to check for pending submissions on page load
+  function checkPendingSubmissions() {
+    // Look for any pending submissions in localStorage
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key.startsWith('signup_')) {
+        try {
+          const data = JSON.parse(localStorage.getItem(key));
+          if (!data.submitted) {
+            // Found unsubmitted data - could offer to retry
+            console.log('Found pending submission:', data);
+            // You could show a notification to the user
+          }
+        } catch (e) {
+          console.error('Error parsing stored submission', e);
+        }
+      }
+    }
+  }
+
+  // Call this when page loads
+  window.addEventListener('load', checkPendingSubmissions);
 })();
