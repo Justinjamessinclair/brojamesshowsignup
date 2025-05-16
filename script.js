@@ -7,7 +7,7 @@
   const feedbackForm = document.getElementById('feedback-form');
   
   // Replace with your web app URL from Step 3
-  const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxVUZBIXQ7gXrfNXneqFCw22v4uJIAXLWg05UdBvxdko8aB9kh1NKHMAf6wn4MmhIZw/exec';
+  const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwR7RH1l2r7icxrNpD0W5Bh0lsK0xQxACmMApA4rNwYN5f77RpbZcgD-vqSl6qIb5_b/exec';
 
   function toggle(el, show) {
     el.classList[show ? 'remove' : 'add']('hidden');
