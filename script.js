@@ -58,8 +58,12 @@
       toggle(postSignup, true);
 
       // Change header and hide image
-      heroHeader.innerHTML = '<span class="emoji-inline">✅</span>You\'re in!';
+      heroHeader.innerHTML =
+        '<img src="icons/unlock.png" alt="Unlocked" class="unlock-inline">You\'re in!';
       heroImage.classList.add('hidden');
+      
+      // 3) Add a class so we can bump the header down
+      heroHeader.parentElement.classList.add('extra-space');
       
     } catch (error) {
       console.error('Error submitting form:', error);

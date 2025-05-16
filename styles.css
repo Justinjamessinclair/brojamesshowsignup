@@ -313,7 +313,7 @@ textarea::placeholder {
 }
 
 .feedback-form {
-  margin-top: calc(var(--gap) / 2);
+  margin-top: calc(var(--gap) * 0.25);
   background: var(--surface);
   border-radius: var(--radius);
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -435,4 +435,40 @@ textarea::placeholder {
 .footer {
   text-align: center;
   margin-top: calc(var(--gap) * 2);
+}
+
+/* 1. Equal space above + below the success panel */
+.post-signup {
+  margin: var(--gap) 0;
+}
+
+/* 2. Force the emoji in the H1 to render as a real ✅ (no gradient‐clip) */
+.hero h1 .emoji-inline {
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  color: inherit !important;
+  display: inline-block;
+  margin-right: 0.5em;
+  font-size: 1em;
+  line-height: 1;
+}
+
+/* 3. Reduce the gap above the feedback form inputs */
+.feedback-form {
+  margin-top: calc(var(--gap) * 0.25);
+}
+
+/* extra top‐margin on the hero header when .extra-space is present */
+.hero.extra-space {
+  margin-top: var(--gap);
+}
+
+/* inline unlock icon styling */
+.unlock-inline {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  filter: none !important;
+  vertical-align: middle;
 }
