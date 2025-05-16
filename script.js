@@ -56,8 +56,11 @@
       // Show success state
       toggle(signupForm, false);
       toggle(postSignup, true);
-
-      // Change header and hide image
+      
+      // Scroll up so the new section is at the top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      // Update header + icon as before
       heroHeader.innerHTML =
         '<img src="icons/unlock.png" alt="Unlocked" class="unlock-inline">You\'re in!';
       heroImage.classList.add('hidden');

@@ -68,9 +68,7 @@ body {
   margin-top: 0;
   display: block;
   object-fit: cover;
-  height: auto;
-  /* rounded corners at top */
-  border-radius: 24px 24px 0 0;
+  height: 350px;
   /* fade-out mask & background */
   background: var(--surface);
   mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
