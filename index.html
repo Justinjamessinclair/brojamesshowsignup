@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.4/tabletop.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f9f9f9">
+  <title>BrotherJames.SignUp</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <img src="https://justinjamessinclair.com/wp-content/uploads/2022/11/Brother-James-e1667584643493.png"
+           alt="Brother James" class="artist-pic">
+      <h1>Join the Mailing List</h1>
+    </header>
+
+    <form id="signup-form" class="form" novalidate>
+      <div class="form-group">
+        <label for="name">Name <span class="required">*</span></label>
+        <input id="name" name="name" type="text" required autocomplete="name" placeholder="First Last">
+      </div>
+      <div class="form-group">
+        <label for="email">Email <span class="required">*</span></label>
+        <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
+      </div>
+      <div class="form-group">
+        <label for="zip">Zip Code <span class="required">*</span></label>
+        <input id="zip" name="zip" type="text" required pattern="\d{5}" inputmode="numeric"
+               placeholder="Your Zip Code">
+      </div>
+      <button type="submit" class="btn btn-primary">
+        Sign Up
+        <img src="icons/unlock.png" alt="Unlock" class="btn-icon">
+      </button>
+      <p class="form-note">
+        <span style="font-weight: 500; color: var(--primary);">
+          By signing up, you agree to join the mailing list
+        </span><br>
+        I’ll let you know when I’m playing near you next!
+      </p>
+    </form>
+
+    <section id="post-signup" class="post-signup hidden">
+      <form id="feedback-form" class="form feedback-form">
+        <h2 class="feedback-heading">Venue Suggestions?</h2>
+        <ul class="feedback-subheading">
+          <li>Do you like to host backyard or living‐room shows?</li>
+          <li>Know somebody who does?</li>
+          <li>Is there a church or event I should play at?</li>
+          <li>Or do you know of a perfect venue for my music?</li>
+        </ul>
+        <textarea id="feedback" name="feedback" rows="3"
+                  placeholder="Where should I play a show in your area next?" required></textarea>
+        <button type="submit" class="btn btn-primary feedback-btn">
+          Send Suggestion
+          <img src="icons/send.png" alt="Send" class="btn-icon">
+        </button>
+      </form>
+
+      <div class="actions">
+        <a href="https://www.patreon.com/brotherjames" class="btn btn-outline btn-patreon">
+          Join My Patreon
+          <img src="icons/patreon.png" class="btn-icon" alt="Patreon">
+        </a>
+        <a href="https://distrokid.com/hyperfollow/brotherjames/next-release" class="btn btn-outline btn-presave">
+          Pre-save the new song!
+          <img src="icons/spotify.png" class="btn-icon" alt="Spotify">
+          <img src="icons/applemusic.png" class="btn-icon" alt="Apple Music">
+        </a>
+      </div>
+
+      <footer class="footer">
+        <div class="social-icons">
+          <a href="https://music.apple.com/us/artist/brother-james/1369005390" target="_blank">
+            <img src="icons/applemusic.png" alt="Apple Music">
+          </a>
+          <a href="https://open.spotify.com/artist/5xZglTXVKOkpkC70KMPis9?si=vnYfw4zkQiyvwJAGh031yw"
+             target="_blank">
+            <img src="icons/spotify.png" alt="Spotify">
+          </a>
+          <a href="https://instagram.com/justinjames" target="_blank">
+            <img src="icons/instagram.png" alt="Instagram">
+          </a>
+          <a href="https://justinjamessinclair.com/Brotherjames" target="_blank">
+            <img src="icons/youtube.png" alt="YouTube">
+          </a>
+        </div>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>
